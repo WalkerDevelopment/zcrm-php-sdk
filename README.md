@@ -16,13 +16,20 @@ Setting Up
 ----------
 PHP SDK is installable through `composer`. Composer is a tool for dependency management in PHP. SDK expects the following from the client app.
 
->Client app must have PHP 5.6 or above with curl extension enabled.
+>Client app must have PHP 7.0 or above with curl extension enabled.
 Client library must be installed into client app though composer.
 The function ZCRMRestClient::initialize() must be called on startup of app.
 
->MySQL should run in the same machine serving at the default port 3306.
-The database name should be "zohooauth".
-There must be a table "oauthtokens" with the columns "useridentifier"(varchar(100)), "accesstoken"(varchar(100)), "refreshtoken"(varchar(100)), "expirytime"(bigint).
+>CREATE TABLE public.zoho_oauthtokens
+(
+    useridentifier character varying(100),
+    accesstoken character varying(100),
+    refreshtoken character varying(100),
+    expirytime bigint,
+    PRIMARY KEY (useridentifier)
+).
+
+Database params come from laravel's setup.
 
 **If `token_persistence_path` provided in `oauth_configuration.properties` file, then persistence happens in file only. In this case, no need of MySQL**
 please create a empty file with name **zcrm_oauthtokens.txt** in the mentioned `token_persistence_path`
