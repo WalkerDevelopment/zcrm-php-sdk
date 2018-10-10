@@ -159,6 +159,10 @@ class ZohoOAuthClient
         list($headers, $content) = explode("\r\n\r\n", $apiResponse, 2);
         $jsonResponse=json_decode($content, true);
 
+        if (!is_array($jsonResponse)) {
+            $jsonResponse = [];
+        }
+
         return $jsonResponse;
     }
 }

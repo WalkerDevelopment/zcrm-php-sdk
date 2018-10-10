@@ -12,7 +12,7 @@ class ZohoOAuth
         self::initialize(false, $configuration);
     }
 
-    public static function initialize($configuration)
+    public static function initialize($configuration = [])
     {
         try {
                 self::setConfigValues($configuration);
@@ -32,6 +32,9 @@ class ZohoOAuth
 
     private function setConfigValues($configuration)
     {
+        if (!is_array($configuration)) {
+            $configuration = [];
+        }
         $config_keys = [
             ZohoOAuthConstants::CLIENT_ID,
             ZohoOAuthConstants::CLIENT_SECRET,
