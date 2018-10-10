@@ -20,7 +20,7 @@ PHP SDK is installable through `composer`. Composer is a tool for dependency man
 Client library must be installed into client app though composer.
 The function ZCRMRestClient::initialize() must be called on startup of app.
 
->CREATE TABLE public.zoho_oauthtokens
+>CREATE TABLE public.oauthtokens
 (
     useridentifier character varying(100),
     accesstoken character varying(100),

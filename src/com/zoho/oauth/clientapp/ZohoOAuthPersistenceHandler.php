@@ -14,7 +14,7 @@ class ZohoOAuthPersistenceHandler implements ZohoOAuthPersistenceInterface
     {
         $this->type = env('DB_CONNECTION', 'pgsql');
         $this->host = env('DB_HOST', '127.0.0.1');
-        $this->port = env('DB_HOST', '5432');
+        $this->port = env('DB_PORT', '5432');
         $this->database = env('DB_DATABASE');
         $this->username = env('DB_USERNAME');
         $this->password = env('DB_PASSWORD');
@@ -82,6 +82,8 @@ class ZohoOAuthPersistenceHandler implements ZohoOAuthPersistenceInterface
                 }
                 if (stripos($query, 'select')) {
                     $return = pg_fetch_assoc($result);
+                } else {
+                    $return = $result;
                 }
             } else {
                 $result = mysqli_query($this->connection, $query);
@@ -91,13 +93,15 @@ class ZohoOAuthPersistenceHandler implements ZohoOAuthPersistenceInterface
                 }
                 if (stripos($query, 'select')) {
                     $return = mysqli_fetch_row($result);
+                } else {
+                    $return = $result;
                 }
             }
+
+            return $return;
         } catch (Exception $ex) {
             OAuthLogger::severe("Exception occured while getting OAuthTokens from DB(file::ZohoOAuthPersistenceHandler)({$ex->getMessage()})\n{$ex}");
         }
-
-        return $return;
     }
 
     private function getConnection()
