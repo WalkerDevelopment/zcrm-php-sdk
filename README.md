@@ -37,7 +37,7 @@ Here's how you install the SDK
 Navigate to the workspace of your client app
 Run the command below:
 
->composer require walker-development/php-sdk
+>composer require walker-development/zoho-oauth-sdk
 
 Hence, the SDK would be installed and a package named `vendor` would be created in the workspace of your client app.
 
