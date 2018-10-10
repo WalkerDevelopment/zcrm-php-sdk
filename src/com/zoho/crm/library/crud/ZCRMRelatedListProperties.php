@@ -1,16 +1,17 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMRelatedListProperties
 {
 	private $sortBy=null;
 	private $sortOrder=null;
 	private $fields=null;
-	
+
 	private function __construct()
 	{
-		
+
 	}
-	
+
 	public static function getInstance()
 	{
 		return new ZCRMRelatedListProperties();

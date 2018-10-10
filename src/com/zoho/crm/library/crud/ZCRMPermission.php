@@ -1,4 +1,5 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMPermission
 {
@@ -13,7 +14,7 @@ class ZCRMPermission
 		$this->name=$name;
 		$this->id=$id;
 	}
-	
+
 	public static function getInstance($name,$id)
 	{
 		return new ZCRMPermission($name,$id);

@@ -1,4 +1,5 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMModuleRelatedList
 {
@@ -10,17 +11,17 @@ class ZCRMModuleRelatedList
 	private $id=null;
 	private $href=null;
 	private $type=null;
-	
+
 	private function __construct($apiName)
 	{
 		$this->apiName=$apiName;
 	}
-	
+
 	public static function getInstance($apiName)
 	{
 		return new ZCRMModuleRelatedList($apiName);
 	}
-	
+
 	public function setApiName($apiName)
 	{
 		$this->apiName=$apiName;
@@ -152,7 +153,7 @@ class ZCRMModuleRelatedList
     public function setType($type){
         $this->type = $type;
     }
-    
+
     public function setRelatedListProperties($relatedListDetails)
     {
     	$this->setModule($relatedListDetails['module']);

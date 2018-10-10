@@ -1,28 +1,30 @@
 <?php
+namespace WalkerDevelopment\Zoho;
+
 class APIConstants
 {
 	const ERROR="error";
-	
-	
-	
+
+
+
 	const REQUEST_METHOD_GET="GET";
 	const REQUEST_METHOD_POST="POST";
 	const REQUEST_METHOD_PUT="PUT";
 	const REQUEST_METHOD_DELETE="DELETE";
-	
+
 	const OAUTH_HEADER_PREFIX="Zoho-oauthtoken ";
 	const AUTHORIZATION="Authorization";
-	
+
 	const API_NAME="api_name";
 	const INVALID_ID_MSG = "The given id seems to be invalid.";
 	const API_MAX_RECORDS_MSG = "Cannot process more than 100 records at a time.";
 	const INVALID_DATA="INVALID_DATA";
-	
+
 	const CODE_SUCCESS = "SUCCESS";
-	
+
 	const STATUS_SUCCESS = "success";
 	const STATUS_ERROR = "error";
-	
+
 	const LEADS = "Leads";
 	const ACCOUNTS = "Accounts";
 	const CONTACTS = "Contacts";
@@ -31,19 +33,19 @@ class APIConstants
 	const SALESORDERS = "SalesOrders";
 	const INVOICES = "Invoices";
 	const PURCHASEORDERS = "PurchaseOrders";
-	
+
 	const PER_PAGE = "per_page";
 	const PAGE = "page";
 	const COUNT = "count";
 	const MORE_RECORDS = "more_records";
-	
+
 	const MESSAGE = "message";
 	const CODE = "code";
 	const STATUS = "status";
-	
+
 	const DATA = "data";
 	const INFO = "info";
-	
+
 	const RESPONSECODE_OK=200;
 	const RESPONSECODE_CREATED=201;
 	const RESPONSECODE_ACCEPTED=202;
@@ -60,13 +62,13 @@ class APIConstants
 	const RESPONSECODE_UNSUPPORTED_MEDIA_TYPE=415;
 	const RESPONSECODE_TOO_MANY_REQUEST=429;
 	const RESPONSECODE_INTERNAL_SERVER_ERROR=500;
-	
+
 	const DOWNLOAD_FILE_PATH="../../../../../../resources";
-	
+
 	const USER_EMAIL_ID="user_email_id";
 	const ACTION="action";
 	const DUPLICATE_FIELD="duplicate_field";
-	
+
 	const ACCESS_TOKEN_EXPIRY="X-ACCESSTOKEN-RESET";
 	const CURR_WINDOW_API_LIMIT="X-RATELIMIT-LIMIT";
 	const CURR_WINDOW_REMAINING_API_COUNT="X-RATELIMIT-REMAINING";

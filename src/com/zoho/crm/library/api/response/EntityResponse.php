@@ -1,6 +1,5 @@
 <?php
-
-require_once realpath(dirname(__FILE__)."/../../common/APIConstants.php");
+namespace WalkerDevelopment\Zoho;
 
 class EntityResponse
 {
@@ -11,14 +10,14 @@ class EntityResponse
 	private $data=null;
 	private $upsertDetails=array();
 	private $details=null;
-	
+
 	public function __construct($entityResponseJSON)
 	{
 		$this->responseJSON=$entityResponseJSON;
 		$this->status=$entityResponseJSON[APIConstants::STATUS];
 		$this->message=$entityResponseJSON[APIConstants::MESSAGE];
 		$this->code=$entityResponseJSON[APIConstants::CODE];
-		
+
 		if(array_key_exists(APIConstants::ACTION,$entityResponseJSON))
 		{
 			$this->upsertDetails[APIConstants::ACTION]=$entityResponseJSON[APIConstants::ACTION];
@@ -113,12 +112,12 @@ class EntityResponse
     {
     	return $this->upsertDetails;
     }
-    
+
     public function setDetails($details)
     {
     	$this->details=$details;
     }
-    
+
     public function getDetails()
     {
     	return $this->details;

@@ -1,4 +1,5 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMLayout
 {
@@ -13,18 +14,18 @@ class ZCRMLayout
 	private $sections=null;
 	private $status=null;
 	private $convertMapping=array();
-	
-	
+
+
 	private function __construct($id)
 	{
 		$this->id=$id;
 	}
-	
+
 	public static function getInstance($id)
 	{
 		return new ZCRMLayout($id);
 	}
-	
+
 	public function setId($id)
 	{
 		$this->id=$id;
@@ -33,7 +34,7 @@ class ZCRMLayout
 	{
 		return $this->id;
 	}
-	
+
 	public function setName($name)
 	{
 		$this->name=$name;
@@ -42,7 +43,7 @@ class ZCRMLayout
 	{
 		return $this->name;
 	}
-	
+
 	public function setCreatedTime($createdTime)
 	{
 		$this->createdTime=$createdTime;
@@ -51,7 +52,7 @@ class ZCRMLayout
 	{
 		return $this->createdTime;
 	}
-	
+
 	public function setModifiedTime($modifiedTime)
 	{
 		$this->modifiedTime=$modifiedTime;
@@ -60,7 +61,7 @@ class ZCRMLayout
 	{
 		return $this->modifiedTime;
 	}
-	
+
 	public function setVisible($visible)
 	{
 		$this->visible=$visible;
@@ -69,7 +70,7 @@ class ZCRMLayout
 	{
 		return $this->visible;
 	}
-	
+
 	public function setModifiedBy($modifiedBy)
 	{
 		$this->modifiedBy=$modifiedBy;
@@ -78,7 +79,7 @@ class ZCRMLayout
 	{
 		return $this->modifiedBy;
 	}
-	
+
 	public function setCreatedBy($createdBy)
 	{
 		$this->createdBy=$createdBy;
@@ -87,7 +88,7 @@ class ZCRMLayout
 	{
 		return $this->createdBy;
 	}
-	
+
 	public function setAccessibleProfiles($profiles)
 	{
 		$this->accessibleProfiles=$profiles;
@@ -96,7 +97,7 @@ class ZCRMLayout
 	{
 		return $this->accessibleProfiles;
 	}
-	
+
 	public function setStatus($status)
 	{
 		$this->status=$status;
@@ -105,7 +106,7 @@ class ZCRMLayout
 	{
 		return $this->status;
 	}
-	
+
 	public function setSections($sections)
 	{
 		$this->sections=$sections;

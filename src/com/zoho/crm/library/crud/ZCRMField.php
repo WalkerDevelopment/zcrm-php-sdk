@@ -1,4 +1,5 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMField
 {
@@ -25,28 +26,28 @@ class ZCRMField
 	private $businessCardSupported=null;
 	private $fieldLayoutPermissions=null;
 	private $decimalPlace=null;
-	
+
 	private $precision=null;
 	private $roundingOption=null;
-	
+
 	private $formulaReturnType=null;
 	private $formulaExpression=null;
-	
+
 	private $prefix=null;
 	private $suffix=null;
 	private $startNumber=null;
 	private $jsonType=null;
-	
+
 	private function __construct($apiName)
 	{
 		$this->apiName=$apiName;
 	}
-	
+
 	public static function getInstance($apiName)
 	{
 		return new ZCRMField($apiName);
 	}
-	
+
 	public function setConvertMapping($convertMapping)
 	{
 		$this->convertMapping=$convertMapping;
@@ -55,7 +56,7 @@ class ZCRMField
 	{
 		return $this->convertMapping;
 	}
-	
+
 	public function getApiName()
 	{
 		return $this->apiName;
@@ -148,7 +149,7 @@ class ZCRMField
 	{
 	 	$this->businessCardSupported=$businessCardSupported;
 	}
-	
+
 	public function setDefaultValue($defaultVal)
 	{
 		$this->defaultValue=$defaultVal;
@@ -181,7 +182,7 @@ class ZCRMField
 	{
 		return $this->pickListValues;
 	}
-	
+
 	/*
 	 * Unique field related properties
 	 */
@@ -201,7 +202,7 @@ class ZCRMField
 	{
 		return $this->caseSensitive;
 	}
-	
+
 	/*
 	 * Currency field related properties
 	 */
@@ -229,7 +230,7 @@ class ZCRMField
 	{
 		return $this->roundingOption;
 	}
-	
+
 	/*
 	 * Formula field related properties
 	 */
@@ -257,7 +258,7 @@ class ZCRMField
 	{
 		return $this->formulaExpression;
 	}
-	
+
 	/*
 	 * Auto number related properties
 	 */
@@ -293,7 +294,7 @@ class ZCRMField
 	{
 		return $this->startNumber;
 	}
-	
+
 	public function setDecimalPlace($decimalPlace)
 	{
 		$this->decimalPlace=$decimalPlace;
@@ -302,7 +303,7 @@ class ZCRMField
 	{
 		return $this->decimalPlace;
 	}
-	
+
 	public function setJsonType($jsonType)
 	{
 		$this->jsonType=$jsonType;

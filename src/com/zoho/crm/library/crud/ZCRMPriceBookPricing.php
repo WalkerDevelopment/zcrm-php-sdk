@@ -1,4 +1,5 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMPriceBookPricing
 {
@@ -6,7 +7,7 @@ class ZCRMPriceBookPricing
 	private $toRange=null;
 	private $fromRange=null;
 	private $discount=null;
-	
+
 	private function __construct($id)
 	{
 		$this->id=$id;

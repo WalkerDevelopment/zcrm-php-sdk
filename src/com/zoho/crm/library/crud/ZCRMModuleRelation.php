@@ -1,18 +1,18 @@
 <?php
-require_once realpath(dirname(__FILE__).'/../api/handler/RelatedListAPIHandler.php');
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMModuleRelation
 {
-	
+
 	private $label=null;
 	private $apiName=null;
 	private $id=null;
 	private $parentModuleAPIName=null;
 	private $visible=null;
-	
+
 	private $parentRecord=null;
 	private $junctionRecord;
-	
+
 	private function __construct($parentModuleAPINameOrParentRecord,$relatedListAPINameOrJunctionRecord)
 	{
 		if($parentModuleAPINameOrParentRecord instanceof ZCRMRecord)
@@ -23,7 +23,7 @@ class ZCRMModuleRelation
 		{
 			$this->parentModuleAPIName=$parentModuleAPINameOrParentRecord;
 		}
-		
+
 		if($relatedListAPINameOrJunctionRecord instanceof ZCRMJunctionRecord)
 		{
 			$this->junctionRecord=$relatedListAPINameOrJunctionRecord;
@@ -36,37 +36,37 @@ class ZCRMModuleRelation
 	{
 		return new ZCRMModuleRelation($parentModuleAPINameOrParentRecord,$relatedListAPIName);
 	}
-	
+
 	public function getRecords($sortByField=null,$sortOrder=null,$page=1,$perPage=20)
 	{
 		return RelatedListAPIHandler::getInstance($this->parentRecord,$this)->getRecords($sortByField,$sortOrder,$page,$perPage);
 	}
-	
+
 	public function getNotes($sortByField=null,$sortOrder=null,$page=1,$perPage=20)
 	{
 		return RelatedListAPIHandler::getInstance($this->parentRecord,$this)->getNotes($sortByField,$sortOrder,$page,$perPage);
 	}
-	
+
 	public function addNote($zcrmNote)
 	{
 		return RelatedListAPIHandler::getInstance($this->parentRecord,$this)->addNote($zcrmNote);
 	}
-	
+
 	public function updateNote($zcrmNote)
 	{
 		return RelatedListAPIHandler::getInstance($this->parentRecord,$this)->updateNote($zcrmNote);
 	}
-	
+
 	public function deleteNote($zcrmNote)
 	{
 		return RelatedListAPIHandler::getInstance($this->parentRecord,$this)->deleteNote($zcrmNote);
 	}
-	
+
 	public function getAttachments($page,$perPage)
 	{
 		return RelatedListAPIHandler::getInstance($this->parentRecord,$this)->getAttachments($page,$perPage);
 	}
-	
+
 	public function uploadAttachment($filePath)
 	{
 		return RelatedListAPIHandler::getInstance($this->parentRecord,$this)->uploadAttachment($filePath);
@@ -75,7 +75,7 @@ class ZCRMModuleRelation
 	{
 		return RelatedListAPIHandler::getInstance($this->parentRecord,$this)->uploadLinkAsAttachment($attachmentUrl);
 	}
-	
+
 	public function downloadAttachment($attachmentId)
 	{
 		return RelatedListAPIHandler::getInstance($this->parentRecord,$this)->downloadAttachment($attachmentId);
@@ -92,7 +92,7 @@ class ZCRMModuleRelation
 	{
 		return RelatedListAPIHandler::getInstance($this->parentRecord, $this->junctionRecord)->removeRelation();
 	}
-	
+
 
     /**
      * label

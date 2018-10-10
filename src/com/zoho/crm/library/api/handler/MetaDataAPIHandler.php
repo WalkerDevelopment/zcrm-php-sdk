@@ -1,29 +1,18 @@
 <?php
-require_once 'APIHandler.php';
-require_once 'ModuleAPIHandler.php';
-require_once realpath(dirname(__FILE__).'/../../common/APIConstants.php');
-require_once realpath(dirname(__FILE__).'/../../common/ZohoHTTPConnector.php');
-require_once realpath(dirname(__FILE__).'/../../api/APIRequest.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMModule.php');
-require_once realpath(dirname(__FILE__).'/../../setup/users/ZCRMUser.php');
-require_once realpath(dirname(__FILE__).'/../../setup/users/ZCRMProfile.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMModuleRelatedList.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMRelatedListProperties.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMCustomView.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMCustomViewCriteria.php');
+namespace WalkerDevelopment\Zoho;
 
 class MetaDataAPIHandler extends APIHandler
 {
 	private function __construct()
 	{
-		
+
 	}
-	
+
 	public static function getInstance()
 	{
 		return new MetaDataAPIHandler();
 	}
-	
+
 	public function getAllModules()
 	{
 		try {
@@ -40,16 +29,16 @@ class MetaDataAPIHandler extends APIHandler
 				array_push($responseData,$module);
 			}
 			$responseInstance->setData($responseData);
-			
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
 			APIExceptionHandler::logException($exception);
 			throw $exception;
 		}
-		
+
 	}
-	
+
 	public function getModule($moduleName)
 	{
 		try {
@@ -66,7 +55,7 @@ class MetaDataAPIHandler extends APIHandler
 			throw $exception;
 		}
 	}
-	
+
 	public function getZCRMModule($moduleDetails)
 	{
 		$crmModuleInstance=ZCRMModule::getInstance($moduleDetails[APIConstants::API_NAME]);
@@ -88,12 +77,12 @@ class MetaDataAPIHandler extends APIHandler
 		{
 			$crmModuleInstance->setSequenceNumber($moduleDetails['sequence_number']);
 		}
-		
+
 		if(isset($moduleDetails['global_search_supported']))
 		{
 			$crmModuleInstance->setGlobalSearchSupported($moduleDetails['global_search_supported']);
 		}
-		
+
 		$zcrmUserInstance=null;
 		if($moduleDetails['modified_by']!=null)
 		{
@@ -101,12 +90,12 @@ class MetaDataAPIHandler extends APIHandler
 		}
 		$crmModuleInstance->setModifiedBy($zcrmUserInstance);
 		$crmModuleInstance->setCustomModule('custom'===$moduleDetails['generated_type']);
-		
+
 		if(array_key_exists("business_card_fields",$moduleDetails))
 		{
 			$crmModuleInstance->setBusinessCardFields($moduleDetails['business_card_fields']);
 		}
-		
+
 		$profileArray=$moduleDetails['profiles'];
 		$profileInstanceArray=array();
 		foreach ($profileArray as $eachProfile)
@@ -114,7 +103,7 @@ class MetaDataAPIHandler extends APIHandler
 			array_push($profileInstanceArray,ZCRMProfile::getInstance($eachProfile['id'],$eachProfile['name']));
 		}
 		$crmModuleInstance->setAllProfiles($profileInstanceArray);
-		
+
 		if(array_key_exists("display_field",$moduleDetails))
 		{
 			$crmModuleInstance->setDisplayFieldName($moduleDetails['display_field']);
@@ -135,27 +124,27 @@ class MetaDataAPIHandler extends APIHandler
 		{
 			$crmModuleInstance->setLayouts(ModuleAPIHandler::getInstance(ZCRMModule::getInstance($moduleDetails[APIConstants::API_NAME]))->getLayouts($moduleDetails['layouts']));
 		}
-		
+
 		if(array_key_exists("fields",$moduleDetails) && $moduleDetails['fields']!=null)
 		{
 			$crmModuleInstance->setFields(ModuleAPIHandler::getInstance(ZCRMModule::getInstance($moduleDetails[APIConstants::API_NAME]))->getFields($moduleDetails['fields']));
 		}
-		
+
 		if(array_key_exists("related_list_properties",$moduleDetails) && $moduleDetails['related_list_properties']!=null)
 		{
 			$crmModuleInstance->setRelatedListProperties(self::getRelatedListProperties($moduleDetails['related_list_properties']));
 		}
-		
+
 		if(array_key_exists('$properties',$moduleDetails) && $moduleDetails['$properties']!=null)
 		{
 			$crmModuleInstance->setProperties($moduleDetails['$properties']);
 		}
-		
+
 		if(array_key_exists('per_page',$moduleDetails) && $moduleDetails['per_page']!=null)
 		{
 			$crmModuleInstance->setPerPage($moduleDetails['per_page']+0);
 		}
-		
+
 		if(array_key_exists('search_layout_fields',$moduleDetails) && $moduleDetails['search_layout_fields']!=null)
 		{
 			$crmModuleInstance->setSearchLayoutFields($moduleDetails['search_layout_fields']);
@@ -170,7 +159,7 @@ class MetaDataAPIHandler extends APIHandler
 			$crmModuleInstance->setDefaultTerritoryId($moduleDetails['territory']['id']);
 			$crmModuleInstance->setDefaultTerritoryName($moduleDetails['territory']['name']);
 		}
-		
+
 		return $crmModuleInstance;
 	}
 	public function getModuleDefaultCustomView($moduleAPIName,$customViewDetails)
@@ -199,7 +188,7 @@ class MetaDataAPIHandler extends APIHandler
 					{
 						$criteriaPattern=$criteriaPattern.$criteria;
 					}
-					else 
+					else
 					{
 						$criteriaInstance=ZCRMCustomViewCriteria::getInstance();
 						$criteriaInstance->setField($criteria['field']);
@@ -221,12 +210,12 @@ class MetaDataAPIHandler extends APIHandler
 			$customViewInstance->setCriteria($criteriaInstanceArray);
 			$customViewInstance->setCriteriaPattern($criteriaPattern);
 		}
-		
+
 		if(isset($customViewDetails['offline']))
 		{
 			$customViewInstance->setOffLine($customViewDetails['offline']);
 		}
-		
+
 		return $customViewInstance;
 	}
 	public function getRelatedListProperties($relatedListProperties)
@@ -235,7 +224,7 @@ class MetaDataAPIHandler extends APIHandler
 		$relatedListPropInstance->setSortBy(array_key_exists("sort_by", $relatedListProperties)?$relatedListProperties['sort_by']:null);
 		$relatedListPropInstance->setSortOrder(array_key_exists("sort_order", $relatedListProperties)?$relatedListProperties['sort_order']:null);
 		$relatedListPropInstance->setFields(array_key_exists("fields", $relatedListProperties)?$relatedListProperties['fields']:null);
-		
+
 		return $relatedListPropInstance;
 	}
 }

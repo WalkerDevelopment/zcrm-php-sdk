@@ -1,11 +1,12 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMJunctionRecord
 {
 	private $id;
 	private $apiName;
 	private $relatedDetails=array();
-	
+
 	private function __construct($apiName,$id)
 	{
 		$this->apiName=$apiName;
@@ -15,8 +16,8 @@ class ZCRMJunctionRecord
 	{
 		return new ZCRMJunctionRecord($apiName,$id);
 	}
-	
-	
+
+
 
     /**
      * id

@@ -1,6 +1,5 @@
 <?php
-require_once 'APIResponse.php';
-require_once '../../common/APIConstants.php';
+namespace WalkerDevelopment\Zoho;
 
 class OldFileAPIResponse extends APIResponse
 {
@@ -8,14 +7,14 @@ class OldFileAPIResponse extends APIResponse
 	{
 		parent::__construct($httpResponse,$httpStatusCode,"downloadFile");
 	}
-	
+
 	public function getFileName()
 	{
 		$contentDisp=$this->getResponseHeaders()['Content-Disposition'];
 		$fileName=substr($contentDisp,strrpos($contentDisp,"'")+1,strlen($contentDisp));
 		return $fileName;
 	}
-	
+
 	public function setResponseJSON()
 	{
 		$httpStatusCode=$this->getHttpStatusCode();
@@ -40,14 +39,14 @@ class OldFileAPIResponse extends APIResponse
 		{
 			parent::setResponseJSON(json_decode($content,true));
 		}
-		else 
+		else
 		{
 			parent::setResponse($content);
 			parent::setResponseJSON(array());
 		}
 		$this->setResponseHeaders($headerMap);
 	}
-	
+
 	public function getFileContent()
 	{
 		try{

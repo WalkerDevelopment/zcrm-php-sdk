@@ -1,15 +1,16 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMCustomViewCategory
 {
 	private $displayValue=null;
 	private $actualValue=null;
-	
+
 	private function __construct()
 	{
-		
+
 	}
-	
+
 	public static function getInstance()
 	{
 		return new ZCRMCustomViewCategory();

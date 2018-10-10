@@ -1,9 +1,5 @@
 <?php
-require_once realpath(dirname(__FILE__)."/../../common/APIConstants.php");
-require_once 'ResponseInfo.php';
-require_once 'EntityResponse.php';
-require_once 'CommonAPIResponse.php';
-require_once realpath(dirname(__FILE__)."/../../exception/ZCRMException.php");
+namespace WalkerDevelopment\Zoho;
 
 class BulkAPIResponse extends CommonAPIResponse
 {
@@ -11,14 +7,14 @@ class BulkAPIResponse extends CommonAPIResponse
 	private $status=null;
 	private $info=null;
 	private $bulkEntitiesResponse=null;
-	
+
 	public function __construct($httpResponse,$httpStatusCode)
 	{
 		parent::__construct($httpResponse,$httpStatusCode);
 		$this->setInfo();
 	}
-	
-	
+
+
 	public function handleForFaultyResponses()
 	{
 		$statusCode=self::getHttpStatusCode();

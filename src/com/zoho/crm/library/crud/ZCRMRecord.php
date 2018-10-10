@@ -1,7 +1,5 @@
 <?php
-require_once realpath(dirname(__FILE__).'/../api/handler/EntityAPIHandler.php');
-require_once realpath(dirname(__FILE__).'/../common/APIConstants.php');
-require_once 'ZCRMModuleRelation.php';
+namespace WalkerDevelopment\Zoho;
 
 /**
  * Provides methods for basic CRUD operations of the record.
@@ -19,7 +17,7 @@ class ZCRMRecord
 	private $modifiedBy=null;
 	private $createdTime=null;
 	private $modifiedTime=null;
-	
+
 	private $fieldNameVsValue=array();
 	private $properties = array();
 	private $participants = array();
@@ -27,24 +25,24 @@ class ZCRMRecord
 	private $layout=null;
 	private $taxList=array();
 	private $lastActivityTime=null;
-	
+
 	private function __construct($module,$entityId)
 	{
 		$this->moduleApiName=$module;
 		$this->entityId=$entityId;
 	}
-	
+
 	public static function getInstance($module,$entityId)
 	{
 		return new ZCRMRecord($module,$entityId);
 	}
 
-	
+
 	public function addTax($taxIns)
 	{
 		array_push($this->taxList,$taxIns);
 	}
-	
+
 	public function getTaxList()
 	{
 		return $this->taxList;
@@ -96,7 +94,7 @@ class ZCRMRecord
     public function setFieldValue($apiName,$value){
         $this->fieldNameVsValue[$apiName] = $value;
     }
-    
+
     public function getData()
     {
     	return $this->fieldNameVsValue;
@@ -213,7 +211,7 @@ class ZCRMRecord
     public function setModifiedTime($modifiedTime){
         $this->modifiedTime = $modifiedTime;
     }
-    
+
     /**
      * Returns the API response of the record creation.
      * @return APIResponse of the record creation.
@@ -244,7 +242,7 @@ class ZCRMRecord
     	}
     	return EntityAPIHandler::getInstance($this)->updateRecord();
     }
-    
+
     /**
      * Returns the API response of the record delete.
      * @return APIResponse of the record delete.
@@ -260,22 +258,22 @@ class ZCRMRecord
     	}
     	return EntityAPIHandler::getInstance($this)->deleteRecord();
     }
-    
+
     public function convert($potentialRecord=null,$assignToUser=null)
     {
     	return EntityAPIHandler::getInstance($this)->convertRecord($potentialRecord, $assignToUser);
     }
-    
-    public function getRelatedListRecords($relatedListAPIName,$sortByField=null,$sortOrder=null,$page=1, $perPage=20) 
+
+    public function getRelatedListRecords($relatedListAPIName,$sortByField=null,$sortOrder=null,$page=1, $perPage=20)
     {
     	return ZCRMModuleRelation::getInstance($this,$relatedListAPIName)->getRecords($sortByField,$sortOrder,$page,$perPage);
     }
-    
+
     public function getNotes($sortByField=null,$sortOrder=null,$page=1, $perPage=20)
     {
     	return ZCRMModuleRelation::getInstance($this,"Notes")->getNotes($sortByField,$sortOrder,$page,$perPage);
     }
-    
+
     public function addNote($zcrmNoteIns)
     {
     	if($zcrmNoteIns->getId()!=null)
@@ -286,7 +284,7 @@ class ZCRMRecord
     	}
     	return ZCRMModuleRelation::getInstance($this,"Notes")->addNote($zcrmNoteIns);
     }
-    
+
     public function updateNote($zcrmNoteIns)
     {
     	if($zcrmNoteIns->getId()==null)
@@ -297,7 +295,7 @@ class ZCRMRecord
     	}
     	return ZCRMModuleRelation::getInstance($this,"Notes")->updateNote($zcrmNoteIns);
     }
-    
+
     public function deleteNote($zcrmNoteIns)
     {
     	if($zcrmNoteIns->getId()==null)
@@ -308,22 +306,22 @@ class ZCRMRecord
     	}
     	return ZCRMModuleRelation::getInstance($this,"Notes")->deleteNote($zcrmNoteIns);
     }
-    
+
     public function getAttachments($page=1,$perPage=20)
     {
     	return ZCRMModuleRelation::getInstance($this,"Attachments")->getAttachments($page,$perPage);
     }
-    
+
     public function uploadAttachment($filePath)
     {
     	return ZCRMModuleRelation::getInstance($this,"Attachments")->uploadAttachment($filePath);
     }
-    
+
     public function uploadLinkAsAttachment($attachmentUrl)
     {
     	return ZCRMModuleRelation::getInstance($this,"Attachments")->uploadLinkAsAttachment($attachmentUrl);
     }
-    
+
     public function downloadAttachment($attachmentId)
     {
     	return ZCRMModuleRelation::getInstance($this,"Attachments")->downloadAttachment($attachmentId);
@@ -347,7 +345,7 @@ class ZCRMRecord
     {
     	return EntityAPIHandler::getInstance($this)->downloadPhoto();
     }
-    
+
     /**
      * To Download the photo of the record
      */
@@ -372,7 +370,7 @@ class ZCRMRecord
     public function getAllProperties(){
     	return $this->properties;
     }
-    
+
     /**
      * properties
      * @return HashMap

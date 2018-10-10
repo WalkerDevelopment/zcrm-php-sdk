@@ -1,4 +1,5 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMProfileSection
 {
@@ -12,8 +13,8 @@ class ZCRMProfileSection
 	{
 		return new ZCRMProfileSection($name);
 	}
-	
-	
+
+
 
     /**
      * name

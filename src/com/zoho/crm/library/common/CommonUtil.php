@@ -1,5 +1,6 @@
 <?php
-require_once realpath(dirname(__FILE__)."/../exception/Logger.php");
+namespace WalkerDevelopment\Zoho;
+
 class CommonUtil
 {
 	public static function getFileContentAsMap($fileHandler)
@@ -23,7 +24,7 @@ class CommonUtil
 		}
 		return $reponseMap;
 	}
-	
+
 	public static function getEmptyJSONObject()
 	{
 		return new ArrayObject();

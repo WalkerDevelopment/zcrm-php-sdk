@@ -1,6 +1,5 @@
 <?php
-require_once realpath(dirname(__FILE__)."/../../common/APIConstants.php");
-require_once realpath(dirname(__FILE__)."/../../exception/ZCRMException.php");
+namespace WalkerDevelopment\Zoho;
 
 class FileAPIResponse
 {
@@ -12,7 +11,7 @@ class FileAPIResponse
 	private $message=null;
 	private $details=null;
 	private $status=null;
-	
+
 	public function setFileContent($httpResponse,$httpStatusCode)
 	{
 		$this->httpStatusCode=$httpStatusCode;
@@ -53,14 +52,14 @@ class FileAPIResponse
 		$this->responseHeaders=$headerMap;
 		return $this;
 	}
-	
+
 	public function getFileName()
 	{
 		$contentDisp=self::getResponseHeaders()['Content-Disposition'];
 		$fileName=substr($contentDisp,strrpos($contentDisp,"'")+1,strlen($contentDisp));
 		return $fileName;
 	}
-	
+
 	public function getFileContent()
 	{
 		return $this->response;
@@ -179,7 +178,7 @@ class FileAPIResponse
     public function setDetails($details){
         $this->details = $details;
     }
-    
+
     public function getStatus()
     {
     	return $this->status;

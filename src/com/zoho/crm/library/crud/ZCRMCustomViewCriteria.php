@@ -1,6 +1,7 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 /**
- * 
+ *
  * @author sumanth-3058
  *
  */
@@ -9,12 +10,12 @@ class ZCRMCustomViewCriteria
 	private $comparator=null;
 	private $field=null;
 	private $value=null;
-	
+
 	private function __construct()
 	{
-		
+
 	}
-	
+
 	public static function getInstance()
 	{
 		return new ZCRMCustomViewCriteria();

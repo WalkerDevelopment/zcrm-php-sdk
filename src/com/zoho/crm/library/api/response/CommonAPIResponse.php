@@ -1,6 +1,5 @@
 <?php
-require_once realpath(dirname(__FILE__)."/../../exception/APIExceptionHandler.php");
-require_once realpath(dirname(__FILE__)."/../../common/APIConstants.php");
+namespace WalkerDevelopment\Zoho;
 
 class CommonAPIResponse
 {
@@ -21,7 +20,7 @@ class CommonAPIResponse
 		$this->setResponseJSON();
 		$this->processResponse();
 	}
-	
+
 	public function processResponse()
 	{
 		if(in_array($this->httpStatusCode,APIExceptionHandler::getFaultyResponseCodes()))
@@ -33,17 +32,17 @@ class CommonAPIResponse
 			$this->processResponseData();
 		}
 	}
-	
+
 	public function handleForFaultyResponses()
 	{
 		return;
 	}
-	
+
 	public function processResponseData()
 	{
 		return;
 	}
-	
+
 	public function setResponseJSON()
 	{
 		if($this->httpStatusCode==APIConstants::RESPONSECODE_NO_CONTENT || $this->httpStatusCode==APIConstants::RESPONSECODE_NOT_MODIFIED)
@@ -77,17 +76,17 @@ class CommonAPIResponse
 	{
 		$this->httpStatusCode=$statusCode;
 	}
-	
+
 	public function getHttpStatusCode()
 	{
 		return $this->httpStatusCode;
 	}
-	
+
 	public function getResponseJSON()
 	{
 		return $this->responseJSON;
 	}
-	
+
 	public function setResponseHeaders($responseHeader)
 	{
 		$this->responseHeaders=$responseHeader;
@@ -96,7 +95,7 @@ class CommonAPIResponse
 	{
 		return $this->responseHeaders;
 	}
-	
+
 	public function getExpiryTimeOfAccessToken()
 	{
 		return $this->responseHeaders[APIConstants::ACCESS_TOKEN_EXPIRY];
@@ -121,7 +120,7 @@ class CommonAPIResponse
 	{
 		return $this->responseHeaders[APIConstants::API_LIMIT_FOR_THE_DAY];
 	}
-	
+
 	/**
 	 * Get the response code like SUCCESS,INVALID_DATA,..etc
 	 * @return String
@@ -129,7 +128,7 @@ class CommonAPIResponse
 	public function getCode(){
 		return $this->code;
 	}
-	
+
 	/**
 	 * Get the response code like SUCCESS,INVALID_DATA,..etc
 	 * @param String $code
@@ -137,8 +136,8 @@ class CommonAPIResponse
 	public function setCode($code){
 		$this->code = $code;
 	}
-	
-	
+
+
 	/**
 	 * Get the response message
 	 * @return String
@@ -146,7 +145,7 @@ class CommonAPIResponse
 	public function getMessage(){
 		return $this->message;
 	}
-	
+
 	/**
 	 * Set the response message
 	 * @param String $message
@@ -154,7 +153,7 @@ class CommonAPIResponse
 	public function setMessage($message){
 		$this->message = $message;
 	}
-	
+
 	/**
 	 * Get the extra details of response (if any)
 	 * @return Array
@@ -162,7 +161,7 @@ class CommonAPIResponse
 	public function getDetails(){
 		return $this->details;
 	}
-	
+
 	/**
 	 * Set the extra details for response (if any)
 	 * @param Array $details
@@ -170,7 +169,7 @@ class CommonAPIResponse
 	public function setDetails($details){
 		$this->details = $details;
 	}
-	
+
 	public function getResponse()
 	{
 		return $this->response;
@@ -179,7 +178,7 @@ class CommonAPIResponse
 	{
 		$this->response=$response;
 	}
-	
+
 	public function getAPIName()
 	{
 		return $this->apiName;

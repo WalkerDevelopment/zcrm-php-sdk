@@ -1,5 +1,5 @@
 <?php
-require_once realpath(dirname(__FILE__)."/../../common/APIConstants.php");
+namespace WalkerDevelopment\Zoho;
 
 class ResponseInfo
 {
@@ -7,7 +7,7 @@ class ResponseInfo
 	private $recordCount=null;
 	private $pageNo=null;
 	private $perPage=null;
-	
+
 	public function __construct($reponseInfoJSON)
 	{
 		$this->moreRecords=(bool)$reponseInfoJSON[APIConstants::MORE_RECORDS];

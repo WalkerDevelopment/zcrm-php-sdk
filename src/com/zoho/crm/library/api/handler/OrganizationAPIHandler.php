@@ -1,15 +1,8 @@
 <?php
-require_once realpath(dirname(__FILE__).'/../../setup/users/ZCRMUser.php');
-require_once realpath(dirname(__FILE__).'/../../setup/users/ZCRMUserCustomizeInfo.php');
-require_once realpath(dirname(__FILE__).'/../../setup/users/ZCRMUserTheme.php');
-require_once realpath(dirname(__FILE__).'/../../setup/users/ZCRMRole.php');
-require_once realpath(dirname(__FILE__).'/../../setup/users/ZCRMProfile.php');
-require_once realpath(dirname(__FILE__).'/../../exception/ZCRMException.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMPermission.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMProfileSection.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMProfileCategory.php');
+namespace WalkerDevelopment\Zoho;
+
 /**
- * 
+ *
  * Purpose of this class is to fire User level APIs and construct the response
  * @author sumanth-3058
  *
@@ -18,14 +11,14 @@ class OrganizationAPIHandler extends APIHandler
 {
 	private function __construct()
 	{
-		
+
 	}
-	
+
 	public static function getInstance()
 	{
 		return new OrganizationAPIHandler();
 	}
-	
+
 	public function getOrganizationDetails()
 	{
 		try{
@@ -36,7 +29,7 @@ class OrganizationAPIHandler extends APIHandler
 			$responseJSON=$responseInstance->getResponseJSON();
 			$orgDetails=$responseJSON['org'][0];
 			$responseInstance->setData(self::setOrganizationDetails($orgDetails));
-				
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -44,7 +37,7 @@ class OrganizationAPIHandler extends APIHandler
 			throw $exception;
 		}
 	}
-	
+
 	public function setOrganizationDetails($orgDetails)
 	{
 		$orgInsatance=ZCRMOrganization::getInstance($orgDetails['company_name'], $orgDetails['id']);
@@ -61,7 +54,7 @@ class OrganizationAPIHandler extends APIHandler
 		$orgInsatance->setIsoCode($orgDetails['iso_code']);
 		$orgInsatance->setMcStatus($orgDetails['mc_status']);
 		$orgInsatance->setMobile($orgDetails['mobile']);
-		
+
 		$orgInsatance->setPhone($orgDetails['phone']);
 		$orgInsatance->setPrimaryEmail($orgDetails['primary_email']);
 		$orgInsatance->setPrimaryZuid($orgDetails['primary_zuid']);
@@ -71,7 +64,7 @@ class OrganizationAPIHandler extends APIHandler
 		$orgInsatance->setWebsite($orgDetails['website']);
 		$orgInsatance->setZgid($orgDetails['zgid']);
 		$orgInsatance->setZipCode($orgDetails['zip']);
-		
+
 		$license_details=$orgDetails['license_details'];
 		if($license_details!=null)
 		{
@@ -81,7 +74,7 @@ class OrganizationAPIHandler extends APIHandler
 			$orgInsatance->setTrialExpiry($license_details['trial_expiry']);
 			$orgInsatance->setTrialType($license_details['trial_type']);
 		}
-		
+
 		return $orgInsatance;
 	}
 	public function getAllRoles()
@@ -99,7 +92,7 @@ class OrganizationAPIHandler extends APIHandler
 				array_push($roleInstanceArray,self::getZCRMRole($role));
 			}
 			$responseInstance->setData($roleInstanceArray);
-			
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -117,7 +110,7 @@ class OrganizationAPIHandler extends APIHandler
 			$responseJSON=$responseInstance->getResponseJSON();
 			$roles=$responseJSON['roles'];
 			$responseInstance->setData(self::getZCRMRole($roles[0]));
-			
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -125,7 +118,7 @@ class OrganizationAPIHandler extends APIHandler
 			throw $exception;
 		}
 	}
-	
+
 	public function getZCRMRole($roleDetails)
 	{
 		$crmRoleInstance=ZCRMRole::getInstance($roleDetails['id'],$roleDetails['name']);
@@ -137,7 +130,7 @@ class OrganizationAPIHandler extends APIHandler
 		}
 		return $crmRoleInstance;
 	}
-	
+
 	public function createUser($userInstance)
 	{
 		try{
@@ -165,7 +158,7 @@ class OrganizationAPIHandler extends APIHandler
 			$this->requestBody=$userJson;
 			$this->apiKey='users';
 			$responseInstance=APIRequest::getInstance($this)->getAPIResponse();
-			
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -181,7 +174,7 @@ class OrganizationAPIHandler extends APIHandler
 			$this->addHeader("Content-Type","application/json");
 			$this->apiKey='users';
 			$responseInstance=APIRequest::getInstance($this)->getAPIResponse();
-			
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -189,7 +182,7 @@ class OrganizationAPIHandler extends APIHandler
 			throw $exception;
 		}
 	}
-	
+
 	public function constructJSONForUser($userInstanceArray)
 	{
 		$userArray=array();
@@ -338,7 +331,7 @@ class OrganizationAPIHandler extends APIHandler
 				array_push($profileInstanceArray,self::getZCRMProfile($profile));
 			}
 			$responseInstance->setData($profileInstanceArray);
-			
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -356,7 +349,7 @@ class OrganizationAPIHandler extends APIHandler
 			$responseJSON=$responseInstance->getResponseJSON();
 			$profiles=$responseJSON['profiles'];
 			$responseInstance->setData(self::getZCRMProfile($profiles[0]));
-			
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -364,7 +357,7 @@ class OrganizationAPIHandler extends APIHandler
 			throw $exception;
 		}
 	}
-	
+
 	public function getZCRMProfile($profileDetails)
 	{
 		$profileInstance=ZCRMProfile::getInstance($profileDetails['id'],$profileDetails['name']);
@@ -428,7 +421,7 @@ class OrganizationAPIHandler extends APIHandler
 			$responseJSON=$responseInstance->getResponseJSON();
 			$users=$responseJSON['users'];
 			$responseInstance->setData(self::getZCRMUser($users[0]));
-			
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -455,7 +448,7 @@ class OrganizationAPIHandler extends APIHandler
 				array_push($userInstanceArray,self::getZCRMUser($user));
 			}
 			$responseInstance->setData($userInstanceArray);
-			
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -467,7 +460,7 @@ class OrganizationAPIHandler extends APIHandler
 	{
 		return self::getUsers(null);
 	}
-	
+
 	public function getAllDeactiveUsers()
 	{
 		return self::getUsers('DeactiveUsers');
@@ -504,7 +497,7 @@ class OrganizationAPIHandler extends APIHandler
 	{
 		return self::getUsers('CurrentUser');
 	}
-	
+
 	public function getZCRMUser($userDetails)
 	{
 		$userInstance=ZCRMUser::getInstance($userDetails['id'],isset($userDetails['name'])?$userDetails['name']:null);
@@ -517,7 +510,7 @@ class OrganizationAPIHandler extends APIHandler
 		}
 		$userInstance->setCity($userDetails['city']);
 		$userInstance->setSignature(isset($userDetails['signature'])?$userDetails['signature']:null);
-		
+
 		$userInstance->setNameFormat(isset($userDetails['name_format'])?$userDetails['name_format']:null);
 		$userInstance->setLanguage($userDetails['language']);
 		$userInstance->setLocale($userDetails['locale']);
@@ -565,10 +558,10 @@ class OrganizationAPIHandler extends APIHandler
 				$userInstance->setFieldValue($key, $value);
 			}
 		}
-		
+
 		return $userInstance;
 	}
-	
+
 	public function getZCRMUserCustomizeInfo($customizeInfo)
 	{
 		$customizeInfoInstance=ZCRMUserCustomizeInfo::getInstance();
@@ -598,7 +591,7 @@ class OrganizationAPIHandler extends APIHandler
 		}
 		return $customizeInfoInstance;
 	}
-	
+
 	public function getZCRMUserTheme($themeDetails)
 	{
 		$themeInstance=ZCRMUserTheme::getInstance();
@@ -606,7 +599,7 @@ class OrganizationAPIHandler extends APIHandler
 		$themeInstance->setNormalTabBackground($themeDetails['normal_tab']['background']);
 		$themeInstance->setSelectedTabFontColor($themeDetails['selected_tab']['font_color']);
 		$themeInstance->setSelectedTabBackground($themeDetails['selected_tab']['background']);
-		
+
 		return $themeInstance;
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMLookupField
 {
@@ -6,17 +7,17 @@ class ZCRMLookupField
 	private $displayLabel=null;
 	private $module=null;
 	private $id=null;
-	
+
 	private function __construct($apiName)
 	{
 		$this->apiName=$apiName;
 	}
-	
+
 	public static function getInstance($apiName)
 	{
 		return new ZCRMLookupField($apiName);
 	}
-	
+
 	public function setModule($module)
 	{
 		$this->module=$module;
@@ -25,7 +26,7 @@ class ZCRMLookupField
 	{
 		return $this->module;
 	}
-	
+
 	public function setDisplayLabel($displayLabel)
 	{
 		$this->displayLabel=$displayLabel;
@@ -34,7 +35,7 @@ class ZCRMLookupField
 	{
 		return $this->displayLabel;
 	}
-	
+
 	public function setId($id)
 	{
 		$this->id=$id;

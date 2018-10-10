@@ -1,33 +1,32 @@
 <?php
+namespace WalkerDevelopment\Zoho;
+
 /**
- * 
+ *
  * @author sumanth-3058
  *
  */
 class ZCRMUserTheme
 {
-	
-	private $normalTabFontColor=null;
-	private $normalTabBackground=null;
-	private $selectedTabFontColor=null;
-	private $selectedTabBackground=null;
-	private function __construct()
-	{
-		
-	}
-	
-	public static function getInstance()
-	{
-		return new ZCRMUserTheme();
-	}
-	
-	
+
+    private $normalTabFontColor=null;
+    private $normalTabBackground=null;
+    private $selectedTabFontColor=null;
+    private $selectedTabBackground=null;
+
+    public static function getInstance()
+    {
+        return new ZCRMUserTheme();
+    }
+
+
 
     /**
      * normalTabFontColor
      * @return String
      */
-    public function getNormalTabFontColor(){
+    public function getNormalTabFontColor()
+    {
         return $this->normalTabFontColor;
     }
 
@@ -35,7 +34,8 @@ class ZCRMUserTheme
      * normalTabFontColor
      * @param String $normalTabFontColor
      */
-    public function setNormalTabFontColor($normalTabFontColor){
+    public function setNormalTabFontColor($normalTabFontColor)
+    {
         $this->normalTabFontColor = $normalTabFontColor;
     }
 
@@ -43,7 +43,8 @@ class ZCRMUserTheme
      * normalTabBackground
      * @return String
      */
-    public function getNormalTabBackground(){
+    public function getNormalTabBackground()
+    {
         return $this->normalTabBackground;
     }
 
@@ -51,7 +52,8 @@ class ZCRMUserTheme
      * normalTabBackground
      * @param String $normalTabBackground
      */
-    public function setNormalTabBackground($normalTabBackground){
+    public function setNormalTabBackground($normalTabBackground)
+    {
         $this->normalTabBackground = $normalTabBackground;
     }
 
@@ -59,7 +61,8 @@ class ZCRMUserTheme
      * selectedTabFontColor
      * @return String
      */
-    public function getSelectedTabFontColor(){
+    public function getSelectedTabFontColor()
+    {
         return $this->selectedTabFontColor;
     }
 
@@ -67,7 +70,8 @@ class ZCRMUserTheme
      * selectedTabFontColor
      * @param String $selectedTabFontColor
      */
-    public function setSelectedTabFontColor($selectedTabFontColor){
+    public function setSelectedTabFontColor($selectedTabFontColor)
+    {
         $this->selectedTabFontColor = $selectedTabFontColor;
     }
 
@@ -75,7 +79,8 @@ class ZCRMUserTheme
      * selectedTabBackground
      * @return String
      */
-    public function getSelectedTabBackground(){
+    public function getSelectedTabBackground()
+    {
         return $this->selectedTabBackground;
     }
 
@@ -83,9 +88,8 @@ class ZCRMUserTheme
      * selectedTabBackground
      * @param String $selectedTabBackground
      */
-    public function setSelectedTabBackground($selectedTabBackground){
+    public function setSelectedTabBackground($selectedTabBackground)
+    {
         $this->selectedTabBackground = $selectedTabBackground;
     }
-
 }
-?>

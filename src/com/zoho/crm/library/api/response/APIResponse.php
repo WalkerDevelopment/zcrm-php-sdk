@@ -1,19 +1,17 @@
 <?php
-require_once realpath(dirname(__FILE__)."/../../common/APIConstants.php");
-require_once realpath(dirname(__FILE__)."/../../exception/ZCRMException.php");
-require_once 'CommonAPIResponse.php';
+namespace WalkerDevelopment\Zoho;
 
 class APIResponse extends CommonAPIResponse
 {
 	private $data=null;
 	private $status=null;
-	
-	
+
+
 	public function __construct($httpResponse,$httpStatusCode,$apiName=null)
 	{
 		parent::__construct($httpResponse,$httpStatusCode,$apiName);
 	}
-	
+
 	public function setData($data)
 	{
 		$this->data=$data;
@@ -29,7 +27,7 @@ class APIResponse extends CommonAPIResponse
 	public function getStatus(){
 		return $this->status;
 	}
-	
+
 	/**
 	 * Set the response status
 	 * @param String $status

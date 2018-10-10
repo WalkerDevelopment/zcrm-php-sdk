@@ -1,36 +1,20 @@
 <?php
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMLayout.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMSection.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMField.php');
-require_once realpath(dirname(__FILE__).'/../../setup/users/ZCRMUser.php');
-require_once realpath(dirname(__FILE__).'/../../setup/users/ZCRMProfile.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMPickListValue.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMLookupField.php');
-require_once realpath(dirname(__FILE__).'/../../common/APIConstants.php');
-require_once 'APIHandler.php';
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMCustomView.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMCustomViewCriteria.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMCustomViewCategory.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMRelatedListProperties.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMModuleRelatedList.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMLeadConvertMapping.php');
-require_once realpath(dirname(__FILE__).'/../../crud/ZCRMLeadConvertMappingField.php');
-require_once 'MetaDataAPIHandler.php';
+namespace WalkerDevelopment\Zoho;
 
 class ModuleAPIHandler extends APIHandler
 {
 	private $module=null;
-	
+
 	private function __construct($module)
 	{
 		$this->module=$module;
 	}
-	
+
 	public static function getInstance(ZCRMModule $module)
 	{
 		return new ModuleAPIHandler($module);
 	}
-	
+
 	public function getModuleDetails()
 	{
 		$this->module = MetaDataAPIHandler::getInstance()->getModule($this->module->getAPIName())->getData();
@@ -50,7 +34,7 @@ class ModuleAPIHandler extends APIHandler
 			$responseJSON=$responseInstance->getResponseJSON();
 			$fieldObj=$responseJSON['fields'][0];
 			$responseInstance->setData(self::getZCRMField($fieldObj));
-			
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -83,7 +67,7 @@ class ModuleAPIHandler extends APIHandler
 			APIExceptionHandler::logException($exception);
 			throw $exception;
 		}
-		
+
 		return $responseInstance;
 	}
 	/**
@@ -106,7 +90,7 @@ class ModuleAPIHandler extends APIHandler
 				array_push($layoutInstancesArray,self::getZCRMLayout($layoutObj));
 			}
 			$responseInstance->setData($layoutInstancesArray);
-			
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -130,7 +114,7 @@ class ModuleAPIHandler extends APIHandler
 			$responseJSON=$responseInstance->getResponseJSON();
 			$layoutDetails=$responseJSON['layouts'][0];
 			$responseInstance->setData(self::getZCRMLayout($layoutDetails));
-			
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -153,7 +137,7 @@ class ModuleAPIHandler extends APIHandler
 			$responseInstance=APIRequest::getInstance($this)->getAPIResponse();
 			$responseJSON=$responseInstance->getResponseJSON();
 			$categories=$responseJSON['info']['translation'];
-			
+
 			$responseInstance->setData(self::getZCRMCustomView($responseJSON['custom_views'][0],$categories));
 			return $responseInstance;
 		}catch (ZCRMException $exception)
@@ -189,9 +173,9 @@ class ModuleAPIHandler extends APIHandler
 			APIExceptionHandler::logException($exception);
 			throw $exception;
 		}
-		
+
 	}
-	
+
 	/**
 	 * Method to update module settings
 	 * Input:: ZCRMModule instance with the properties to get updated
@@ -207,16 +191,16 @@ class ModuleAPIHandler extends APIHandler
 			$this->requestBody=$inputJSON;
 			$this->apiKey='modules';
 			$responseInstance=APIRequest::getInstance($this)->getAPIResponse();
-				
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
 			APIExceptionHandler::logException($exception);
 			throw $exception;
 		}
-	
+
 	}
-	
+
 	/**
 	 * Method to update custom view settings of a module
 	 * Input:: ZCRMCustomView instance with the properties to get updated
@@ -233,7 +217,7 @@ class ModuleAPIHandler extends APIHandler
 			$this->requestBody=$inputJSON;
 			//$this->apiKey='custom_views';
 			$responseInstance=APIRequest::getInstance($this)->getAPIResponse();
-				
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -241,7 +225,7 @@ class ModuleAPIHandler extends APIHandler
 			throw $exception;
 		}
 	}
-	
+
 	/**
 	 * Method to get all the related lists of a module
 	 * Returns api response with array of related list instances
@@ -263,14 +247,14 @@ class ModuleAPIHandler extends APIHandler
 				array_push($relatedListInstanceArray,$moduleRelatedListIns->setRelatedListProperties($relatedListObj));
 			}
 			$responseInstance->setData($relatedListInstanceArray);
-				
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
 			APIExceptionHandler::logException($exception);
 			throw $exception;
 		}
-	
+
 	}
 	/**
 	 * Method to get the specified related list
@@ -290,7 +274,7 @@ class ModuleAPIHandler extends APIHandler
 			$moduleRelatedListIns=ZCRMModuleRelatedList::getInstance($relatedListObj['api_name']);
 			$moduleRelatedListIns=$moduleRelatedListIns->setRelatedListProperties($relatedListObj);
 			$responseInstance->setData($moduleRelatedListIns);
-				
+
 			return $responseInstance;
 		}catch (ZCRMException $exception)
 		{
@@ -298,7 +282,7 @@ class ModuleAPIHandler extends APIHandler
 			throw $exception;
 		}
 	}
-	
+
 	/**
 	 * Method to process the given custom view details and set them in ZCRMCustomView instance
 	 * Input:: custom view details as array
@@ -380,25 +364,25 @@ class ModuleAPIHandler extends APIHandler
 		}
 		return $layoutArray;
 	}
-	
+
 	public function getAllSectionsOfLayout($allSectionDetails)
 	{
 		$sectionsArray=array();
 		foreach ($allSectionDetails as $eachSection)
 		{
 			$sectionInstance=ZCRMSection::getInstance($eachSection['name']);
-			
+
 			$sectionInstance->setDisplayName($eachSection['display_label']);
 			$sectionInstance->setColumnCount($eachSection['column_count']+0);
 			$sectionInstance->setSequenceNumber($eachSection['sequence_number']+0);
 			$sectionInstance->setFields(self::getSectionFields($eachSection['fields']));
-			
+
 			array_push($sectionsArray,$sectionInstance);
 		}
-		
+
 		return $sectionsArray;
 	}
-	
+
 	public function getSectionFields($allFieldArray)
 	{
 		$fieldsArray=array();
@@ -436,7 +420,7 @@ class ModuleAPIHandler extends APIHandler
 			array_push($pickListInstanceArray,self::getPickListValueInstance($pickList));
 		}
 		$fieldInstance->setPickListFieldValues($pickListInstanceArray);
-		
+
 		return $fieldInstance;
 	}
 	/**
@@ -487,7 +471,7 @@ class ModuleAPIHandler extends APIHandler
 		{
 			$fieldInstance->setConvertMapping($fieldDetails['convert_mapping']);
 		}
-		
+
 		if(array_key_exists("view_type",$fieldDetails))
 		{
 			$viewTypeArray=$fieldDetails['view_type'];
@@ -510,7 +494,7 @@ class ModuleAPIHandler extends APIHandler
 			}
 			$fieldInstance->setFieldLayoutPermissions($fieldLayoutPermissions);
 		}
-		
+
 		$pickListArray=$fieldDetails['pick_list_values'];
 		if(sizeof($pickListArray)>0)
 		{
@@ -525,7 +509,7 @@ class ModuleAPIHandler extends APIHandler
 		{
 			$fieldInstance->setLookUpField(self::getLookupFieldInstance($fieldDetails['lookup']));
 		}
-		
+
 		if(array_key_exists("unique", $fieldDetails) && sizeof($fieldDetails['unique'])>0)
 		{
 			$fieldInstance->setUniqueField(true);
@@ -598,7 +582,7 @@ class ModuleAPIHandler extends APIHandler
 		{
 			$pickListInstance->setMaps($pickListDetails['maps']);
 		}
-		
+
 		return $pickListInstance;
 	}
 	/**
@@ -632,11 +616,11 @@ class ModuleAPIHandler extends APIHandler
 			array_push($accessibleProfileInstances,$profileInstance);
 		}
 		$layoutInstance->setAccessibleProfiles($accessibleProfileInstances);
-		
+
 		$layoutInstance->setSections(self::getAllSectionsOfLayout($layoutDetails['sections']));
-		
+
 		$layoutInstance->setStatus($layoutDetails['status']);
-		
+
 		if(isset($layoutDetails['convert_mapping']))
 		{
 			$convertModules=array('Contacts','Deals','Accounts');
@@ -661,11 +645,11 @@ class ModuleAPIHandler extends APIHandler
 				}
 			}
 		}
-		
+
 		return $layoutInstance;
 	}
-	
-	
+
+
 	public function constructJSONForCustomView($customViewInstance)
 	{
 		$customViewDetails=array();
@@ -703,9 +687,9 @@ class ModuleAPIHandler extends APIHandler
 		}
 		*/
 		$customViewJSON=array("custom_views"=>array($customViewDetails));
-		
+
 		return json_encode($customViewJSON);
-		
+
 	}
 	public function constructJSONForModuleUpdate($moduleInstance)
 	{
@@ -736,7 +720,7 @@ class ModuleAPIHandler extends APIHandler
 			$moduleSettings['related_list_properties']=$propArray;
 		}
 		$moduleJSON=array("modules"=>array($moduleSettings));
-		
+
 		return json_encode($moduleJSON);
 	}
 }

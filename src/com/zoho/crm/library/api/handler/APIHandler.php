@@ -1,43 +1,43 @@
 <?php
-require_once 'APIHandlerInterface.php';
+namespace WalkerDevelopment\Zoho;
 
 class APIHandler implements APIHandlerInterface
 {
 
 	protected $requestMethod;
 	protected $urlPath;
-	
+
 	protected $requestHeaders;
 	protected $requestParams;
 	protected $requestBody;
 	protected $apiKey;
-	
-	
+
+
 	public function getRequestMethod()
 	{
 		return $this->requestMethod;
 	}
-	
+
 	public function getUrlPath()
 	{
 		return $this->urlPath;
 	}
-	
+
 	public function getRequestHeaders()
 	{
 		return $this->requestHeaders;
 	}
-	
+
 	public function getRequestBody()
 	{
 		return $this->requestBody;
 	}
-	
+
 	public function getRequestParams()
 	{
 		return $this->requestParams;
 	}
-	
+
 	public function addParam($key,$value) {
 		if(!isset($this->requestParams[$key]))
 		{
@@ -51,22 +51,22 @@ class APIHandler implements APIHandlerInterface
 	public function addHeader($key,$value) {
 		$this->requestHeaders[$key]=$value;
 	}
-	
+
 	public function getRequestHeadersAsMap()
 	{
 		return CommonUtil.convertJSONObjectToHashMap($this->requestHeaders);
 	}
-	
+
 	public function getRequestParamsAsMap()
 	{
 		return CommonUtil.convertJSONObjectToHashMap($this->requestParams);
 	}
-	
+
 	public static function getEmptyJSONObject()
 	{
 		return json_decode('{}');
 	}
-	
+
 
     /**
      *  Set the request method

@@ -1,4 +1,5 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMSection
 {
@@ -7,17 +8,17 @@ class ZCRMSection
 	private $columnCount=null;
 	private $sequenceNumber=null;
 	private $fields=null;
-	
+
 	private function __construct($name)
 	{
 		$this->name=$name;
 	}
-	
+
 	public static function getInstance($name)
 	{
 		return new ZCRMSection($name);
 	}
-	
+
 	public function setName($name)
 	{
 		$this->name=$name;
@@ -26,7 +27,7 @@ class ZCRMSection
 	{
 		return $this->name;
 	}
-	
+
 	public function setDisplayName($displayName)
 	{
 		$this->displayName=$displayName;
@@ -35,7 +36,7 @@ class ZCRMSection
 	{
 		return $this->displayName;
 	}
-	
+
 	public function setColumnCount($count)
 	{
 		$this->columnCount=$count;
@@ -44,7 +45,7 @@ class ZCRMSection
 	{
 		return $this->columnCount;
 	}
-	
+
 	public function setSequenceNumber($seqNumber)
 	{
 		$this->sequenceNumber=$seqNumber;
@@ -53,7 +54,7 @@ class ZCRMSection
 	{
 		return $this->sequenceNumber;
 	}
-	
+
 	public function setFields($fields)
 	{
 		$this->fields=$fields;

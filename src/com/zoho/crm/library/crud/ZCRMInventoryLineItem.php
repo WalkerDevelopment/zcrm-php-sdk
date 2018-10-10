@@ -1,5 +1,5 @@
 <?php
-require_once 'ZCRMRecord.php';
+namespace WalkerDevelopment\Zoho;
 
 /**
  * This class is to maintain the details of inventory line item
@@ -32,12 +32,12 @@ class ZCRMInventoryLineItem
 			$this->id=$param;
 		}
 	}
-	
+
 	public static function getInstance($param)
 	{
 		return new ZCRMInventoryLineItem($param);
 	}
-	
+
 
     /**
      * id

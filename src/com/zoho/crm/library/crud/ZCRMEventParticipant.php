@@ -1,4 +1,5 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMEventParticipant
 {
@@ -8,13 +9,13 @@ class ZCRMEventParticipant
 	private $type=null;
 	private $isInvited=null;
 	private $status=null;
-	
+
 	private function __construct($type,$id)
 	{
 		$this->type=$type;
 		$this->id=$id;
 	}
-	
+
 	public static function getInstance($type,$id)
 	{
 		return new ZCRMEventParticipant($type,$id);

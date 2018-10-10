@@ -1,11 +1,12 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMNote
 {
 	private $id=null;
 	private $title=null;
 	private $content=null;
-	
+
 	private $parentRecord=null;
 	private $owner=null;
 	private $createdBy=null;
@@ -18,13 +19,13 @@ class ZCRMNote
 	private $parentModule=null;
 	private $parentName=null;
 	private $parentId=null;
-	
+
 	private function __construct($parentRecord,$noteId)
 	{
 		$this->parentRecord=$parentRecord;
 		$this->id=$noteId;
 	}
-	
+
 	public static function getInstance($parentRecord,$noteId=null)
 	{
 		return new ZCRMNote($parentRecord,$noteId);

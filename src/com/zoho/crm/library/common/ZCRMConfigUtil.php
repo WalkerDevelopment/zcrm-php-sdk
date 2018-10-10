@@ -1,11 +1,10 @@
 <?php
-require_once 'CommonUtil.php';
-require_once realpath(dirname(__FILE__)."/../../../oauth/client/ZohoOAuth.php");
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMConfigUtil
 {
 	private static $configProperties=array();
-	
+
 	public static function getInstance()
 	{
 		return new ZCRMConfigUtil();
@@ -60,7 +59,7 @@ class ZCRMConfigUtil
 	{
 	    $config_keys = array(APIConstants::CURRENT_USER_EMAIL,ZohoOAuthConstants::SANDBOX,APIConstants::API_BASEURL,
 	        APIConstants::API_VERSION,APIConstants::APPLICATION_LOGFILE_PATH);
-	    
+
 	    if(!array_key_exists(ZohoOAuthConstants::SANDBOX,$configuration))
 	    {
 	        self::$configProperties[ZohoOAuthConstants::SANDBOX] = "false";
@@ -79,7 +78,7 @@ class ZCRMConfigUtil
 	            self::$configProperties[$key] = $configuration[$key];
 	    }
 	}
-	
+
 	public static function loadConfigProperties($fileHandler)
 	{
 		$configMap=CommonUtil::getFileContentAsMap($fileHandler);
@@ -88,22 +87,22 @@ class ZCRMConfigUtil
 			self::$configProperties[$key]=$value;
 		}
 	}
-	
+
 	public static function getConfigValue($key)
 	{
 		return isset(self::$configProperties[$key])?self::$configProperties[$key]:'';
 	}
-	
+
 	public static function setConfigValue($key,$value)
 	{
 		self::$configProperties[$key]=$value;
 	}
-	
+
 	public static function getAPIBaseUrl()
 	{
 		return self::getConfigValue("apiBaseUrl");
 	}
-	
+
 	public static function getAPIVersion()
 	{
 		return self::getConfigValue("apiVersion");
@@ -111,7 +110,7 @@ class ZCRMConfigUtil
 	public static function getAccessToken()
 	{
 		$currentUserEmail= ZCRMRestClient::getCurrentUserEmailID();
-		
+
 		if ($currentUserEmail == null && self::getConfigValue("currentUserEmail") == null)
 		{
 			throw new ZCRMException("Current user should either be set in ZCRMRestClient or in configuration.properties file");
@@ -123,7 +122,7 @@ class ZCRMConfigUtil
 		$oAuthCliIns = ZohoOAuth::getClientInstance();
 		return $oAuthCliIns->getAccessToken($currentUserEmail);
 	}
-	
+
 	public static function getAllConfigs()
 	{
 		return self::$configProperties;

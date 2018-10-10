@@ -1,4 +1,5 @@
 <?php
+namespace WalkerDevelopment\Zoho;
 
 class ZCRMLeadConvertMappingField
 {
@@ -11,7 +12,7 @@ class ZCRMLeadConvertMappingField
 		$this->apiName=$apiName;
 		$this->id=$id;
 	}
-	
+
 	public static function getInstance($apiName,$id)
 	{
 		return new ZCRMLeadConvertMappingField($apiName,$id);
