@@ -1,6 +1,8 @@
 <?php
 namespace WalkerDevelopment\Zoho;
 
+use Exception;
+
 class ZCRMException extends Exception
 {
     protected $message = 'Unknown exception';     // Exception message
