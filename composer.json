@@ -1,13 +1,19 @@
 {
-    "name": "zohocrm/php-sdk",
+    "name": "walker-development/php-sdk",
     "description": "Zoho CRM API SDK for PHP",
     "type": "SDK",
-    "homepage": "https://github.com/zoho/zcrm-php-sdk",
+    "homepage": "https://github.com/WalkerDevelopment/zcrm-php-sdk",
     "authors": [
         {
             "name": "Zoho CRM API Team",
             "email":"support@zohocrm.com",
             "homepage": "https://www.zoho.com/crm/help/customer-support.html",
+            "role": "Developer"
+        },
+        {
+            "name": "Michael Walker",
+            "email":"michael@walkerdevelopment.ca",
+            "homepage": "https://WalkerDevelopment.ca",
             "role": "Developer"
         }
     ],
