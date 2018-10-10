@@ -31,33 +31,13 @@ The function ZCRMRestClient::initialize() must be called on startup of app.
 
 Database params come from laravel's setup.
 
-**If `token_persistence_path` provided in `oauth_configuration.properties` file, then persistence happens in file only. In this case, no need of MySQL**
-please create a empty file with name **zcrm_oauthtokens.txt** in the mentioned `token_persistence_path`
-
-Installation of SDK through composer
-------------------------------------
-Install Composer(if not installed)
-Run this command to install the composer
-
->curl -sS https://getcomposer.org/installer | php
-
-To make the composer accessible globally, follow the instructions from the link below
-
-To install composer on mac/ linux machine:
-
->https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx
-
-To install composer on windows machine:
-
->https://getcomposer.org/doc/00-intro.md#installation-windows
-
 Install PHP SDK
 ---------------
 Here's how you install the SDK
 Navigate to the workspace of your client app
 Run the command below:
 
->composer require zohocrm/php-sdk
+>composer require walker-development/php-sdk
 
 Hence, the SDK would be installed and a package named `vendor` would be created in the workspace of your client app.
 
