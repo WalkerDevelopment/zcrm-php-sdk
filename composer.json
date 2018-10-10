@@ -1,6 +1,6 @@
 {
-    "name": "walker-development/php-sdk",
-    "description": "Zoho CRM API SDK for PHP",
+    "name": "walker-development/zoho-oauth-sdk",
+    "description": "Zoho CRM API SDK for Laravel",
     "type": "SDK",
     "homepage": "https://github.com/WalkerDevelopment/zcrm-php-sdk",
     "authors": [
